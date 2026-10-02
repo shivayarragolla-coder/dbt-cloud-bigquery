@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: bigquery_source
+    database: fluted-century-463207-d3
+    schema: testing
+
+    tables:
+      - name: orders
+
+models:
+  - name: transformed_orders
+    description: "Transformed orders table"
+
+    config:
+      materialized: table
+      alias: orders_rps
+
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
